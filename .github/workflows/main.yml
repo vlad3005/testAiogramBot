@@ -14,7 +14,7 @@ jobs:
         key: ${{secrets.PRIVATE_KEY}}
         port: 22
         script: |
-          sudo reboot || true -S ${{secrets.PASSWORD}}
+          echo ${{secrets.PASSWORD}} | sudo --stdin reboot
 
     - name: Deploy using ssh
       uses: appleboy/ssh-action@master
@@ -24,9 +24,7 @@ jobs:
         key: ${{secrets.PRIVATE_KEY}}
         port: 22
         script: |
-          cd ~
-          cd test_bot
-          cd testAiogramBot
+          cd ~/test_bot/testAiogramBot
           git pull origin master
           git status
           source ~/test_bot/test_bot_env/bin/activate
