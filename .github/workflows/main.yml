@@ -1,20 +1,44 @@
 name: main
 on: [push]
+
 jobs:
-  New-Push:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+    - name: Deploy using ssh
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{secrets.HOST}}
+        username: ${{secrets.USERNAME}}
+        key: ${{secrets.PRIVATE_KEY}}
+        port: 22
+        script:
+          cd ~/test_bot/testAiogramBot/
+          git pull origin master
+          git status
+          source test_bot/test_bot_env/bin/activate
+          python3 aiogram_run.py
+          deactivate
 
-      - name: Run venv
-        run: |
-          python -m venv venv
-          source venv/bin/activate
-
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
-      - name: Run
-        run: python3 aiogram_run.py
+#env:
+#  TOKEN: ${{secrets.TOKEN}}
+#  ADMINS: ${{secrets.ADMIN}}
+#jobs:
+#  New-Push:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v4
+#
+#      - name: Run venv
+#        run: |
+#          python -m venv venv
+#          source venv/bin/activate
+#
+#      - name: Install dependencies
+#        run: pip install -r requirements.txt
+#
+#      - name: Run
+#        run: python3 aiogram_run.py
 
