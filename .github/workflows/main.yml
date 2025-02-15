@@ -8,7 +8,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run venv
-        run: source test_bot/test_bot_env/bin/activate
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
 
       - name: Run
         run: python3 aiogram_run.py
