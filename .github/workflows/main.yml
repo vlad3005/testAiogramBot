@@ -14,7 +14,7 @@ jobs:
         key: ${{secrets.PRIVATE_KEY}}
         port: 22
         script:
-          cd ~/test_bot/testAiogramBot/
+          cd ~/test_bot/testAiogramBot
           git pull origin master
           git status
           source test_bot/test_bot_env/bin/activate
