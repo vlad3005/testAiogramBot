@@ -7,6 +7,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Run venv
+        run: source test_bot/test_bot_env/bin/activate
+
       - name: Run
         run: python3 aiogram_run.py
 
