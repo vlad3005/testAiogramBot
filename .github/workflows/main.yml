@@ -14,8 +14,7 @@ jobs:
         key: ${{secrets.PRIVATE_KEY}}
         port: 22
         script: |
-          sudo reboot || true
-          ${{secrets.PASSWORD}}
+          sudo reboot || true -S ${{secrets.PASSWORD}}
 
     - name: Deploy using ssh
       uses: appleboy/ssh-action@master
