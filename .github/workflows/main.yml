@@ -19,7 +19,7 @@ jobs:
           cd testAiogramBot
           git pull origin master
           git status
-          source test_bot/test_bot_env/bin/activate
+          source ~/test_bot/test_bot_env/bin/activate
           python3 aiogram_run.py
           deactivate
 
